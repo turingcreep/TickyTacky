@@ -19,10 +19,10 @@ function startGame(){
 function wait(gameState,dispatcher){
 	var promise =  {
 		fulfill:function(){
-			play(gameState);
+			this.success(gameState);
 		},
 		reject:function(){
-			shakeHands(gameState);
+			this.failure(gameState);
 		},
 		then:function(success,failure){
 			this.success = success;
