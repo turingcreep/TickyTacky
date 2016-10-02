@@ -10,7 +10,7 @@ var	Mark = {
 
 function TickyTacky(dispatcher){
 	var	gameState = startGame();
-	wait(gameState).then(play,shakeHands);
+	wait(gameState,dispatcher).then(play,shakeHands);
 }
 
 function startGame(){
