@@ -1,34 +1,17 @@
-var	Mark = {
-		Player:true,
-		Game:false
-	},
-	Result = {
-		playerWon:true,
-		gameWon:false
-		tie:null
-	};
-
-function TickyTacky(dispatcher){
-	var	gameState = startGame();
-	wait(gameState,dispatcher).then(play,shakeHands);
+//dispatcher
+//constants
+//promise
+//think
+function TickyTacky(dispatcher,state){
+	var	gameState = state|startGame();
+	wait(gameState,dispatcher).then(think,shakeHands);
 }
 
 function startGame(){
 	return [ [null,null,null],[null,null,null],[null,null,null]];	
 }
 function wait(gameState,dispatcher){
-	var promise =  {
-		fulfill:function(){
-			this.success(gameState);
-		},
-		reject:function(){
-			this.failure(gameState);
-		},
-		then:function(success,failure){
-			this.success = success;
-			this.failure = failure;	
-		}
-	};
+	var promise =  new TTPromise(gameState);
 	dispatcher.subscribe('playerMoved',function(){
 		promise.fulfill();
 	});	
@@ -97,5 +80,3 @@ function checkDiagonal(gameState){
 		}
 	}
 }
-
-//Now we come to the tricky part - the play, which is where reInforced learning is supposed to happen as well as actions 
