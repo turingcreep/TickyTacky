@@ -49,4 +49,5 @@ function xFormGame(state,op){
 			newState = (newState<<2)|stateBits;
 		}
 	}
+	return newState;
 }
